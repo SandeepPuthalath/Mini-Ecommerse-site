@@ -1,0 +1,62 @@
+<section>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-6">
+        <h2 class="text-center">Edit Product</h2>
+        <form id="form" action="/admin/edit-product/{{product._id}}" method="post" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Product Name</label>
+            <input type="text" name="name" class="form-control" id="exampleInputEmail1" value="{{product.name}}"
+              aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Category</label>
+            <input type="text" name="category" class="form-control" id="exampleInputEmail1" value="{{product.category}}"
+              aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Price</label>
+            <input type="number" name="price" class="form-control" id="exampleInputEmail1" value="{{product.price}}"
+              aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Description</label>
+            <input type="text" name="description" class="form-control" id="exampleInputEmail1"
+              value="{{product.description}}" aria-describedby="emailHelp">
+          </div>
+          <div class="mb-3">
+            <img id="imgView" style="width: 100px;height: 100px;" src="/product-images/{{product._id}}.jpg" alt="">
+            <a id="editImg" onclick="editImage()" class="btn btn-primary">Edit Image</a>
+          </div>
+          <div id="imageEdit" style="display: none;" class="mb-3">
+            <label for="formFileMultiple" class="form-label">Image</label>
+
+            <input name="image" class="form-control" type="file" value="upload" id="formFileMultiple"
+              onchange="viewImage(event)" multiple />
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+
+  let form = document.getElementById('form');
+  let imageInput = document.getElementById('imageEdit').value;
+
+  form.addEventListener('submit',(e) =>{
+    e.defaultPrevented()// prevent form from auto submitting..\
+  })
+  function viewImage(event) {
+    document.getElementById('imgView').src = URL.createObjectURL(event.target.files[0])
+  }
+  
+  function editImage(){
+     let imageEdit = document.getElementById('imageEdit');
+     imageEdit.style.display = 'block';
+  }
+   
+</script>
